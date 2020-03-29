@@ -18,6 +18,6 @@ router.put('/:id', messageController.update);
 router.delete('/:id', messageController.remove);
 
 // GET /api/v1/messages?user=username
-router.delete('/:id', messageController.remove);
+router.get('/:id', messageController.getByUser);
 
 module.exports = router;

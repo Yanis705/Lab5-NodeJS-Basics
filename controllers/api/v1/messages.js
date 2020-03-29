@@ -2,20 +2,7 @@ const Message = require('../../../models/Message');
 
 const getAll = (req, res) => {
     Message.find({}, (err, docs) => {
-        if(!err){
-            res.json({
-                "status": "success",
-                "data": {
-                    "messages": docs
-                }
-            })
-        }
-    });
-}
-
-const get = (req, res) => {
-    Message.find({_id: req.params.id}, (err, docs) => {
-        if(!err){
+        if (!err) {
             res.json({
                 "status": "success",
                 "data": {
@@ -26,7 +13,28 @@ const get = (req, res) => {
         if (err) {
             res.json({
                 "status": "error",
-                "message": "Could not find a message with this ID"
+                "message": "Could not get messages"
+            });
+        }
+    });
+}
+
+const get = (req, res) => {
+    Message.find({
+        _id: req.params.id
+    }, (err, docs) => {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "data": {
+                    "messages": docs
+                }
+            })
+        }
+        if (err) {
+            res.json({
+                "status": "error",
+                "message": "Could not find a message with id: " + req.params.id
             });
         }
     });
@@ -44,7 +52,7 @@ const create = (req, res) => {
                 "message": "Could not save message"
             });
         }
-        if(!err){
+        if (!err) {
             res.json({
                 "status": "success",
                 "data": {
@@ -56,11 +64,66 @@ const create = (req, res) => {
 }
 
 const update = (req, res) => {
-    res.send("UPDATING a message with id " + req.params.id);
+    Message.findByIdAndUpdate({_id: req.params.id}, (err, doc) => {
+        if(!err){
+            res.json({
+                "status" : "success",
+                "data" : {
+                    "message": "Updated message with id: " + req.params.id
+                }
+            })
+        }
+        if (err) {
+            res.json({
+                "status": "error",
+                "data": {
+                    "message": "Could not update message with id: " + req.params.id
+                }
+            });
+        }
+    })
 }
 
 const remove = (req, res) => {
-    res.send("DELETING a message with id " + req.params.id);
+    Message.findByIdAndDelete({_id: req.params.id}, (err, doc) => {
+        if(!err){
+            res.json({
+                "status" : "success",
+                "data" : {
+                    "message": "Removed message with id: " + req.params.id
+                }
+            })
+        }
+        if (err) {
+            res.json({
+                "status": "error",
+                "data": {
+                    "message": "Could not remove message with id: " + req.params.id
+                }
+            });
+        }
+    })
+}
+
+const getByUser = (req, res) => {
+    Message.find({
+        user: req.params.user
+    }, (err, doc) => {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "data": {
+                    "message": doc
+                }
+            })
+        }
+        if (err) {
+            res.json({
+                "status": "error",
+                "message": "Could not find messages for this user"
+            });
+        }
+    })
 }
 
 //
@@ -70,3 +133,4 @@ module.exports.get = get;
 module.exports.create = create;
 module.exports.update = update;
 module.exports.remove = remove;
+module.exports.getByUser = getByUser;
