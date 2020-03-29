@@ -1,0 +1,23 @@
+{
+  "name": "lab5",
+  "version": "1.0.0",
+  "description": "Lab5 NodeJS Basics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yanis705/Lab5-NodeJS-Basics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yanis705/Lab5-NodeJS-Basics/issues"
+  },
+  "homepage": "https://github.com/Yanis705/Lab5-NodeJS-Basics#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
