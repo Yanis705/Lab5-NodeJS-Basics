@@ -17,6 +17,7 @@ router.put('/:id', messageController.update);
 // DELETE /api/v1/messages/:id
 router.delete('/:id', messageController.remove);
 
-module.exports = router;
+// GET /api/v1/messages?user=username
+router.delete('/:id', messageController.remove);
 
-//
+module.exports = router;

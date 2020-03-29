@@ -8,6 +8,12 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const apiCommentsRouter = require('./routes/api/v1/messages')
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/lab5', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 const app = express();
 
 // view engine setup

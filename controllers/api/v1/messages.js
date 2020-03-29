@@ -1,13 +1,58 @@
+const Message = require('../../../models/Message');
+
 const getAll = (req, res) => {
-    res.send("GETTING messages");
+    Message.find({}, (err, docs) => {
+        if(!err){
+            res.json({
+                "status": "success",
+                "data": {
+                    "messages": docs
+                }
+            })
+        }
+    });
 }
 
 const get = (req, res) => {
-    res.send("GETTING message with ID " + req.params.id);
+    Message.find({_id: req.params.id}, (err, docs) => {
+        if(!err){
+            res.json({
+                "status": "success",
+                "data": {
+                    "messages": docs
+                }
+            })
+        }
+        if (err) {
+            res.json({
+                "status": "error",
+                "message": "Could not find a message with this ID"
+            });
+        }
+    });
 }
 
 const create = (req, res) => {
-    res.send("POSTING a new message for user Pikachu");
+    console.log(req.body);
+    let message = new Message();
+    message.text = req.body.text;
+    message.user = req.body.user;
+    message.save((err, doc) => {
+        if (err) {
+            res.json({
+                "status": "error",
+                "message": "Could not save message"
+            });
+        }
+        if(!err){
+            res.json({
+                "status": "success",
+                "data": {
+                    "message": doc
+                }
+            });
+        }
+    })
 }
 
 const update = (req, res) => {
