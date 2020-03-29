@@ -1,0 +1,5 @@
+{
+    "Database": {
+    "conn": "mongodb+srv://YanisDM:oZSiOqNWbS7JBBJv@lab5-3c3sx.mongodb.net/test?retryWrites=true&w=majority"
+    }
+}

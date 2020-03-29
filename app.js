@@ -6,10 +6,11 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const apiCommentsRouter = require('./routes/api/v1/messages')
+const apiCommentsRouter = require('./routes/api/v1/messages');
+const config = require('config');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/lab5', {
+mongoose.connect(config.get('Database.conn'), {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
